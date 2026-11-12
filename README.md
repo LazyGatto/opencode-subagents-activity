@@ -29,16 +29,24 @@ Small TUI plugin built on the official [`@opencode/plugin/tui`](https://opencode
 > sidebar block stops updating). npm install is documented only after the
 > bug is fixed and the plugin is published.
 
-### Primary (reliable): git clone + absolute path
+### 1. `opencode plugin add github:…` (works on current CLI versions)
 
-Clone the repository to a convenient location, for example:
+```sh
+opencode plugin add github:LazyGatto/opencode-subagents-activity
+```
+
+Restart the TUI after installing.
+
+### 2. Fallback: git clone + absolute path (version-independent)
+
+On some CLI versions the git-dep install step above can fail with
+`NpmInstallFailedError: … git dep preparation failed`. If that happens, clone the
+repository and reference it by absolute path:
 
 ```sh
 git clone https://github.com/LazyGatto/opencode-subagents-activity.git \
   ~/opencode-plugins/opencode-subagents-activity
 ```
-
-Then list the clone's absolute path in `~/.config/opencode/cli.json`:
 
 ```jsonc
 // ~/.config/opencode/cli.json
@@ -49,17 +57,8 @@ Then list the clone's absolute path in `~/.config/opencode/cli.json`:
 
 Restart the TUI after installing.
 
-### Alternative: `opencode plugin add github:…` (depends on CLI version)
-
-```sh
-opencode plugin add github:LazyGatto/opencode-subagents-activity
-```
-
-Note: installing a git dep this way may fail on some CLI versions with
-`NpmInstallFailedError: … git dep preparation failed` (upstream bug); if that
-happens, fall back to the clone + absolute path above. Listing `"github:…"`
-directly in `cli.json` triggers the same git-dep install and can fail the same
-way, so it is not recommended as the primary method either.
+Note: listing `"github:…"` directly in `cli.json` triggers the same git-dep install as
+`plugin add`, so if that step fails on your CLI version, prefer the absolute path.
 
 Requirements: OpenCode V2; `@opentui/core`, `@opentui/solid`, `solid-js` are peer
 dependencies provided by the host.
