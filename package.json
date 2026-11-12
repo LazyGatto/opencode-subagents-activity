@@ -1,0 +1,19 @@
+{
+  "name": "opencode-subagents-activity",
+  "version": "0.1.0",
+  "description": "OpenCode V2 TUI plugin: subagent last-activity monitor in the sidebar (staleness dots, click to open a subagent session).",
+  "author": "LazyGatto",
+  "license": "MIT",
+  "type": "module",
+  "exports": { "./tui": "./src/tui.tsx" },
+  "keywords": ["opencode", "opencode-plugin", "tui", "subagent", "activity", "monitor"],
+  "homepage": "https://github.com/LazyGatto/opencode-subagents-activity#readme",
+  "bugs": { "url": "https://github.com/LazyGatto/opencode-subagents-activity/issues" },
+  "repository": { "type": "git", "url": "git+https://github.com/LazyGatto/opencode-subagents-activity.git" },
+  "dependencies": { "@opencode/plugin": "latest" },
+  "peerDependencies": {
+    "@opentui/core": ">=0.5.8",
+    "@opentui/solid": ">=0.5.8",
+    "solid-js": ">=1.9.0"
+  }
+}
