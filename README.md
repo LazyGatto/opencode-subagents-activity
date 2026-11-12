@@ -26,25 +26,40 @@ Small TUI plugin built on the official [`@opencode/plugin/tui`](https://opencode
 > **TUI plugin** — installing from **npm is affected by an upstream bug**
 > ([anomalyco/opencode#39986](https://github.com/anomalyco/opencode/issues/39986)):
 > the npm cache skips the host transform, which disables reactivity (the
-> sidebar block stops updating). Use the **GitHub install** below; npm
-> install is documented only after the bug is fixed and the plugin is
-> published.
+> sidebar block stops updating). npm install is documented only after the
+> bug is fixed and the plugin is published.
+
+### Primary (reliable): git clone + absolute path
+
+Clone the repository to a convenient location, for example:
 
 ```sh
-opencode plugin add github:LazyGatto/opencode-subagents-activity
-# or pin a release tag (the #v0.1.0 tag is cut when the release is published;
-# until then install without the #ref, which tracks main):
-opencode plugin add github:LazyGatto/opencode-subagents-activity#v0.1.0
+git clone https://github.com/LazyGatto/opencode-subagents-activity.git \
+  ~/opencode-plugins/opencode-subagents-activity
 ```
 
-Or add it to `~/.config/opencode/cli.json`:
+Then list the clone's absolute path in `~/.config/opencode/cli.json`:
 
 ```jsonc
 // ~/.config/opencode/cli.json
 {
-  "plugins": ["github:LazyGatto/opencode-subagents-activity"]
+  "plugins": ["/absolute/path/to/opencode-subagents-activity"]
 }
 ```
+
+Restart the TUI after installing.
+
+### Alternative: `opencode plugin add github:…` (depends on CLI version)
+
+```sh
+opencode plugin add github:LazyGatto/opencode-subagents-activity
+```
+
+Note: installing a git dep this way may fail on some CLI versions with
+`NpmInstallFailedError: … git dep preparation failed` (upstream bug); if that
+happens, fall back to the clone + absolute path above. Listing `"github:…"`
+directly in `cli.json` triggers the same git-dep install and can fail the same
+way, so it is not recommended as the primary method either.
 
 Requirements: OpenCode V2; `@opentui/core`, `@opentui/solid`, `solid-js` are peer
 dependencies provided by the host.
