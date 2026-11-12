@@ -23,10 +23,26 @@ Small TUI plugin built on the official [`@opencode/plugin/tui`](https://opencode
 
 ## Install
 
+> **TUI plugin** — installing from **npm is affected by an upstream bug**
+> ([anomalyco/opencode#39986](https://github.com/anomalyco/opencode/issues/39986)):
+> the npm cache skips the host transform, which disables reactivity (the
+> sidebar block stops updating). Use the **GitHub install** below; npm
+> install is documented only after the bug is fixed and the plugin is
+> published.
+
+```sh
+opencode plugin add github:LazyGatto/opencode-subagents-activity
+# or pin a release tag (the #v0.1.0 tag is cut when the release is published;
+# until then install without the #ref, which tracks main):
+opencode plugin add github:LazyGatto/opencode-subagents-activity#v0.1.0
+```
+
+Or add it to `~/.config/opencode/cli.json`:
+
 ```jsonc
 // ~/.config/opencode/cli.json
 {
-  "plugins": ["opencode-subagents-activity"]
+  "plugins": ["github:LazyGatto/opencode-subagents-activity"]
 }
 ```
 
