@@ -23,25 +23,13 @@ Small TUI plugin built on the official [`@opencode/plugin/tui`](https://opencode
 
 ## Install
 
-> **TUI plugin** — installing from **npm is affected by an upstream bug**
-> ([anomalyco/opencode#39986](https://github.com/anomalyco/opencode/issues/39986)):
-> the npm cache skips the host transform, which disables reactivity (the
-> sidebar block stops updating). npm install is documented only after the
-> bug is fixed and the plugin is published.
+> **TUI plugin** — reactive block in the sidebar. **Cached installs (`npm`, `github:…`)
+> freeze reactivity** (the block stops updating, clicks don't respond) due to upstream
+> bug [anomalyco/opencode#39986](https://github.com/anomalyco/opencode/issues/39986):
+> the loader skips the host transform for cached packages. **The working install is a
+> local clone referenced by an absolute path** (the host transform applies).
 
-### 1. `opencode plugin add github:…` (works on current CLI versions)
-
-```sh
-opencode plugin add github:LazyGatto/opencode-subagents-activity
-```
-
-Restart the TUI after installing.
-
-### 2. Fallback: git clone + absolute path (version-independent)
-
-On some CLI versions the git-dep install step above can fail with
-`NpmInstallFailedError: … git dep preparation failed`. If that happens, clone the
-repository and reference it by absolute path:
+### Working: git clone + absolute path
 
 ```sh
 git clone https://github.com/LazyGatto/opencode-subagents-activity.git \
@@ -57,8 +45,15 @@ git clone https://github.com/LazyGatto/opencode-subagents-activity.git \
 
 Restart the TUI after installing.
 
-Note: listing `"github:…"` directly in `cli.json` triggers the same git-dep install as
-`plugin add`, so if that step fails on your CLI version, prefer the absolute path.
+### Not for now: npm / `github:` (load, but reactivity is frozen)
+
+```sh
+opencode plugin add github:LazyGatto/opencode-subagents-activity
+# or npm, once published
+```
+
+These install and load the plugin, but interactive updates stay frozen until
+[anomalyco/opencode#39986](https://github.com/anomalyco/opencode/issues/39986) is fixed.
 
 Requirements: OpenCode V2; `@opentui/core`, `@opentui/solid`, `solid-js` are peer
 dependencies provided by the host.
