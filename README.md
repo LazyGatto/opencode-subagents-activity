@@ -13,8 +13,14 @@ Small TUI plugin built on the official [`@opencode/plugin/tui`](https://opencode
 | Sidebar (`sidebar.content`) | A **Subagents** block that lists **only subagents that are actually running** (name on the left, last-activity age on the right). |
 | Popup (click a subagent row, or `/subagents`) | A searchable list of **all** subagents of the session — running first, finished below — with a compact summary per row. |
 
-- **The sidebar stays quiet**: finished subagents are not shown, and in a session that never
-  spawned a subagent the block is not rendered at all. When nothing is running the
+> **No subagents in the session → no block.** This is expected behaviour, not a broken or
+> missing install. The widget appears in the sidebar the moment a subagent is spawned
+> (foreground or background) and disappears again once nothing is running. To convince
+> yourself the plugin is loaded in an idle session: `/subagents` answers with a
+> "No subagents in this session yet" toast, and `opencode plugin list` shows
+> `opencode-subagents-activity`.
+
+- **The sidebar stays quiet**: finished subagents are not shown; when nothing is running the
   block shows a single muted line (`nothing running · history`) — the history lives in the popup.
 - **Header row** (`▼ Subagents (N running)`) — click **anywhere on the row** to collapse or
   expand, exactly like the native `MCP`/`Session` blocks.
