@@ -15,9 +15,11 @@ Small TUI plugin built on the official [`@opencode/plugin/tui`](https://opencode
 
 > **No subagents in the session → no block.** This is expected behaviour, not a broken or
 > missing install. The widget appears in the sidebar the moment a subagent is spawned
-> (foreground or background) and disappears again once nothing is running. To convince
-> yourself the plugin is loaded in an idle session: `/subagents` answers with a
-> "No subagents in this session yet" toast, and `opencode plugin list` shows
+> (foreground or background) and then stays for the rest of the session: once everything has
+> finished it shows `▼ Subagents (0 running)` with a `nothing running · history` line, and the
+> history stays reachable from the popup. Only a session that never spawned a subagent has no
+> block at all. To convince yourself the plugin is loaded: `/subagents` opens the popup (or
+> answers with a "No subagents in this session yet" toast), and `opencode plugin list` shows
 > `opencode-subagents-activity`.
 
 - **The sidebar stays quiet**: finished subagents are not shown; when nothing is running the
